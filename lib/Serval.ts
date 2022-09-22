@@ -26,7 +26,7 @@ export class Serval extends Client {
 
     public async start(token?: string) {
         // Handle all the commands and events first.
-        //this.commands.loadAll(this.options.commandsDirectory);
+        await this.commands.loadAll(this.options.commandsDirectory);
         await this.events.loadAll(this.options.eventsDirectory);
 
         // Load all localizations.

@@ -15,6 +15,10 @@ const bot = new Serval({
     // Serval-esque options.
     commandsDirectory: process.env.COMMAND_DIRECTORY || "./commands",
     eventsDirectory: process.env.EVENT_DIRECTORY || "./events",
+    intlDirectory: process.env.INTL_DIRECTORY || "./intl",
+
+    // Serval inernational options.
+    defaultLocale: process.env.DEFAULT_LOCALE || "en-US"
 })
 
 // Start the bot.
