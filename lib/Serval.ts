@@ -7,7 +7,6 @@ import { ServalOptions } from "./utils/ServalOptions";
 export class Serval extends Client {
     /**
      * The manager for all the commands this bot has to offer.
-     * @type {CommandManager}
      */
     public commands: CommandManager;
     public events: EventManager;
@@ -30,8 +29,7 @@ export class Serval extends Client {
         await this.events.loadAll(this.options.eventsDirectory);
 
         // Load all localizations.
-        // TODO: Make it properly work
-        //await this.intl.loadAll(this.options.intlDirectory);
+        await this.intl.loadAll(this.options.intlDirectory);
 
         // Start the client.
         return this.login(token);
