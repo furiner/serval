@@ -3,7 +3,7 @@ import { config } from "dotenv";
 config();
 
 import { GatewayIntentBits } from "discord.js";
-import { Serval } from "./lib/Serval";
+import { Serval } from "./src/Serval";
 
 // Create the bot client.
 const bot = new Serval({
@@ -15,7 +15,7 @@ const bot = new Serval({
     // Serval-esque options.
     commandsDirectory: process.env.COMMAND_DIRECTORY || "./commands",
     eventsDirectory: process.env.EVENT_DIRECTORY || "./events",
-    intlDirectory: process.env.INTL_DIRECTORY || "./intl",
+    intlDirectory: process.env.INTL_DIRECTORY || "./i18n",
 
     // Serval inernational options.
     defaultLocale: process.env.DEFAULT_LOCALE || "en-US"
