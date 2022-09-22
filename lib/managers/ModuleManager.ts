@@ -1,6 +1,7 @@
 import path from "path";
-import { Client, Collection } from "discord.js";
+import { Collection } from "discord.js";
 import { lstatSync, readdirSync } from "fs";
+import { Serval } from "../Serval";
 
 /**
  * A basic manager for handling all things related to a single type of structure as modules.
@@ -8,9 +9,9 @@ import { lstatSync, readdirSync } from "fs";
 export class ModuleManager<I> {
     /**
      * The client that instantiated this manager.
-     * @type {Client}
+     * @type {Serval}
      */
-    public client: Client;
+    public client: Serval;
 
     /**
      * A collection of all the structures that belong to this manager.
@@ -18,7 +19,7 @@ export class ModuleManager<I> {
      */
     public cache: Collection<string, I>;
 
-    constructor(client: Client) {
+    constructor(client: Serval) {
         this.client = client;
         this.cache = new Collection<string, I>();
     }
@@ -47,6 +48,9 @@ export class ModuleManager<I> {
             if (lstat.isFile()) {
                 // This is likely a file, so we'll try to load it.
                 this.load(file.split(".")[0], path.join(directory, file));
+            } else if (lstat.isDirectory()) {
+                // This is likely a directory, so we'll try to load all the files in it.
+                this.loadAll(path.join(directory, file));
             }
         }
     }

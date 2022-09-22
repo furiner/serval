@@ -1,10 +1,10 @@
-import { Client } from "discord.js";
+import { Serval } from "../Serval";
 import { ModuleManager } from "./ModuleManager";
 
-export type Event = (client: Client<boolean>, ...args: any[]) => void;
+export type Event = (client: Serval, ...args: any[]) => void;
 
 export class EventManager extends ModuleManager<Event> {
-    constructor(client: Client) {
+    constructor(client: Serval) {
         super(client);
     }
     
