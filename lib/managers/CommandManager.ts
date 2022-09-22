@@ -7,13 +7,11 @@ import { Command } from "../structures/commands/Command";
 export class CommandManager {
     /**
      * The client that instantiated this manager.
-     * @type {Client}
      */
     public client: Client;
 
     /**
      * A collection of all the structures that belong to this manager.
-     * @type {Collection<string, ICommand>}
      */
     public cache: Collection<string, Command>
 
@@ -22,7 +20,7 @@ export class CommandManager {
         this.cache = new Collection<string, Command>();
     }
 
-    async load(name: string, filePath: string, category?: CommandCategory, ) {
+    async load(name: string, filePath: string, category?: CommandCategory) {
         // TODO: This is ugly.
         const commandExports = await import(filePath);
         const command: Command = commandExports[Object.keys(commandExports)[0]];
@@ -44,16 +42,22 @@ export class CommandManager {
             const lstat = lstatSync(path.join(directory, file));
 
             if (lstat.isFile()) {
-                if (!category) { }
                 // This is likely a file, so we'll try to load it.
                 this.load(file.split(".")[0], path.join(directory, file), category);
-            } else if (lstat.isDirectory()) {
+            } else {
                 // This is likely a directory, so we'll try to load all the files in it.
                 // Create a category for this directory.
                 const directoryCategory = new CommandCategory(file, category);
 
+                if (category) {
+                    directoryCategory.parent = category;
+
+                    // Add the category to the parent's children.
+                    category.subcategories.push(directoryCategory);
+                }
+
                 // Load all the files.
-                this.loadAll(path.join(directory, file));
+                this.loadAll(path.join(directory, file), directoryCategory);
             }
         }
     }

@@ -9,13 +9,11 @@ import { Serval } from "../Serval";
 export class ModuleManager<I> {
     /**
      * The client that instantiated this manager.
-     * @type {Serval}
      */
     public client: Serval;
 
     /**
      * A collection of all the structures that belong to this manager.
-     * @type {Collection<string, I>}
      */
     public cache: Collection<string, I>;
 
@@ -47,10 +45,10 @@ export class ModuleManager<I> {
 
             if (lstat.isFile()) {
                 // This is likely a file, so we'll try to load it.
-                this.load(file.split(".")[0], path.join(directory, file));
+                await this.load(file.split(".")[0], path.join(directory, file));
             } else if (lstat.isDirectory()) {
                 // This is likely a directory, so we'll try to load all the files in it.
-                this.loadAll(path.join(directory, file));
+                await this.loadAll(path.join(directory, file));
             }
         }
     }
