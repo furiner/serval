@@ -1,0 +1,31 @@
+{
+  "name": "serval",
+  "version": "1.0.0",
+  "description": "ultimate osu! general purpose bot for players",
+  "main": "bot.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irisu01/serval.git"
+  },
+  "author": "Irisu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/irisu01/serval/issues"
+  },
+  "homepage": "https://github.com/irisu01/serval#readme",
+  "dependencies": {
+    "discord.js": "^14.4.0",
+    "dotenv": "^16.0.2",
+    "node-fetch": "^3.2.10"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.18",
+    "@types/node-fetch": "^2.6.2"
+  }
+}
