@@ -11,19 +11,16 @@ export class CommandCategory {
 
     /**
      * The commands in the category.
-     * @type {Command[]}
     */
     public commands: Command[];
 
     /**
      * The subcategories within the category.
-     * @type {Category[]}
      */
     public subcategories: CommandCategory[];
 
     /**
      * The parent of this category.
-     * @type {Category?}
      */
     public parent?: CommandCategory;
 
