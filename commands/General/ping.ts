@@ -1,4 +1,4 @@
-import { Command } from "../../lib/structures/commands/Command";
+import { Command } from "../../src/structures/commands/Command";
 
 export class Ping extends Command {
     constructor() {
