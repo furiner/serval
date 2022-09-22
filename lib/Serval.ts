@@ -1,6 +1,7 @@
 import { Client } from "discord.js";
 import { CommandManager } from "./managers/CommandManager";
 import { EventManager } from "./managers/EventManager";
+import { LocalizationManager } from "./managers/LocalizationManager";
 import { ServalOptions } from "./utils/ServalOptions";
 
 export class Serval extends Client {
@@ -10,6 +11,7 @@ export class Serval extends Client {
      */
     public commands: CommandManager;
     public events: EventManager;
+    public intl: LocalizationManager;
 
     public options: ServalOptions;
 
@@ -19,12 +21,19 @@ export class Serval extends Client {
         this.options = options;
         this.commands = new CommandManager(this);
         this.events = new EventManager(this);
+        this.intl = new LocalizationManager(this);
     }
 
-    public start(token?: string): Promise<string> {
+    public async start(token?: string) {
         // Handle all the commands and events first.
         //this.commands.loadAll(this.options.commandsDirectory);
-        this.events.loadAll(this.options.eventsDirectory);
+        await this.events.loadAll(this.options.eventsDirectory);
+
+        // Load all localizations.
+        // TODO: Make it properly work
+        //await this.intl.loadAll(this.options.intlDirectory);
+
+        // Start the client.
         return this.login(token);
     }
 }
