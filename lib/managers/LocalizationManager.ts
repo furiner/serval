@@ -12,21 +12,11 @@ export class LocalizationManager extends ModuleManager<Localization> {
      * @param locale The locale to get.
      */
     get(locale: string) {
-        let localization = this.cache.get(locale);
-
-        // If the localization doesn't exist, return the default one.
-        if (!localization) {
-            localization = this.cache.get(this.client.options.defaultLocale);
-            console.log(this.cache.get(this.client.options.defaultLocale))
-        };
-        console.log(locale)
-
-        return localization;
+        return this.cache.get(locale) ?? this.cache.get(this.client.options.defaultLocale);
     }
     
     async load(key: string, filePath: string) {
         const localization = new Localization(key, (await import(filePath)).default);
-
         
         // Handle the localization.
         this.cache.set(key, localization)

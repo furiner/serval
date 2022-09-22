@@ -1,16 +1,14 @@
-interface LooseObject {
-    [key: string]: any | LooseObject;
-}
+import { JSONObject } from "../utils/json/JSONObject";
+import { JSONType } from "../utils/json/JSONType";
 
 export class Localization {
     /**
      * The language of the localization.
-     * @type {string}
      */
     public language: string;
-    public locale: LooseObject;
+    public locale: object;
 
-    constructor(lang: string, locale: LooseObject) {
+    constructor(lang: string, locale: object) {
         this.language = lang;
         this.locale = locale;
     }
@@ -22,21 +20,11 @@ export class Localization {
      */
     handle(key: string, defaultMessage: string) {
         // Recursively handle the key if it's a nested object.
-        let result: string = defaultMessage;
-        console.log(key)
+        let result = defaultMessage;
         if (key.includes(".")) {
             const keys = key.split(".");
 
-            let current = this.locale;
-            for (const key of keys) {
-                if (current[key]) {
-                    current = current[key];
-                } else {
-                    return result;
-                }
-            }
-            
-            result = current as unknown as string;
+            return eval(`this.locale.${keys.join(".")}`);
         }
     }
 }
