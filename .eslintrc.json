@@ -11,7 +11,7 @@
         "semi": ["error", "always"],
         "eqeqeq": ["error", "always"],
         "@typescript-eslint/no-inferrable-types": "off",
-        "@typescript-eslint/no-expicit-any": "off",
+        "@typescript-eslint/no-explicit-any": "off",
 
         "sort-imports": ["error", {
             "ignoreDeclarationSort": true
