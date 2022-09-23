@@ -13,15 +13,15 @@ jobs:
         
         steps:
             - name: Checkout project
-            uses: actions/checkout@v3
+              uses: actions/checkout@v3
 
             - name: Use Node.js v18
-            uses: actions/setup-node@v3
-            with:
-                node-version: 18
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
 
             - name: Install NPM dependencies
-            run: npm install
+              run: npm install
 
             - name: Run ESLint
-            run: npx eslint ./src
+              run: npx eslint ./src
