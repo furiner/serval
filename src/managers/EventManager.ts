@@ -12,6 +12,6 @@ export class EventManager extends ModuleManager<Event> {
         const event: Event = (await import(filePath)).default;
 
         // Handle the event.
-        this.client.on(key, (...args: any[]) => event(this.client, ...args));
+        this.client.on(key, async(...args: any[]) => await event(this.client, ...args));
     }
 }
