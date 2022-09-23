@@ -1,4 +1,5 @@
-import { Client } from "discord.js";
+import { Client, Routes, SlashCommandBuilder } from "discord.js";
+import { REST } from "@discordjs/rest";
 import { CommandManager } from "./managers/CommandManager";
 import { EventManager } from "./managers/EventManager";
 import { LocalizationManager } from "./managers/LocalizationManager";
@@ -31,7 +32,33 @@ export class Serval extends Client {
         // Load all localizations.
         await this.intl.loadAll(this.options.intlDirectory);
 
+        // Build all commands.
+        const slashCommands = [];
+
+        for (const command of this.commands.cache.values()) {
+            const slashBuilder = command.build(new SlashCommandBuilder());
+            console.log(command);
+            slashBuilder.setName(command.label.toLowerCase());
+            slashBuilder.setDescription(command.description);
+
+            // Add the command to the array.
+            slashCommands.push(slashBuilder.toJSON());
+        }
+
         // Start the client.
-        return this.login(token);
+        const resp = await this.login(token);
+
+
+        // Register all the commands.
+        const rest = new REST({ version: "9" }).setToken(token || "");
+
+        await rest.put(
+            Routes.applicationCommands(this.user?.id || ""),
+            { body: slashCommands },
+        );
+
+
+        // Return the response of login.
+        return resp;
     }
 }

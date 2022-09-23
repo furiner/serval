@@ -1,34 +1,26 @@
 import path from "path";
 import { lstatSync, readdirSync } from "fs";
-import { Client, Collection } from "discord.js";
+import { Serval } from "../Serval";
+import { BaseModuleManager } from "./BaseModuleManager";
 import { CommandCategory } from "../structures/CommandCategory";
 import { Command } from "../structures/commands/Command";
 
-export class CommandManager {
-    /**
-     * The client that instantiated this manager.
-     */
-    public client: Client;
-
-    /**
-     * A collection of all the structures that belong to this manager.
-     */
-    public cache: Collection<string, Command>
-
-    constructor(client: Client) {
-        this.client = client;
-        this.cache = new Collection<string, Command>();
+export class CommandManager extends BaseModuleManager<Command> {
+    constructor(client: Serval) {
+        super(client);
     }
 
     async load(name: string, filePath: string, category?: CommandCategory) {
         const commandExports = await import(filePath);
-        const command: Command = commandExports[Object.keys(commandExports)[0]];
+        const command = new commandExports[Object.keys(commandExports)[0]]();
+
+        // Set command details.
+        command.label = name;
 
         if (category) {
             // Set the command's category.
             command.category = category;
         }
-        
 
         // Add the command to the cache.
         this.cache.set(name, command);
@@ -42,7 +34,7 @@ export class CommandManager {
 
             if (lstat.isFile()) {
                 // This is likely a file, so we'll try to load it.
-                this.load(file.split(".")[0], path.join(directory, file), category);
+                await this.load(file.split(".")[0], path.join(directory, file), category);
             } else {
                 // This is likely a directory, so we'll try to load all the files in it.
                 // Create a category for this directory.
@@ -57,7 +49,7 @@ export class CommandManager {
                 }
 
                 // Load all the files.
-                this.loadAll(path.join(directory, file), directoryCategory);
+                await this.loadAll(path.join(directory, file), directoryCategory);
             }
         }
     }

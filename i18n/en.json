@@ -1,5 +1,10 @@
 {
     "bot": {
         "botName": "Serval"
+    },
+    "events": {
+        "ready": {
+            "message": "Logged in as {0}!"
+        }
     }
 }
