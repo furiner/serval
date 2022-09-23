@@ -10,6 +10,7 @@
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
         "eqeqeq": ["error", "always"],
+        "@typescript-eslint/no-inferrable-types": "off",
 
         "sort-imports": ["error", {
             "ignoreDeclarationSort": true
