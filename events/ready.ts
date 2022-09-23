@@ -1,5 +1,7 @@
 import { Serval } from "../src/Serval";
 
 export default (client: Serval) => {
-    console.log(`Logged in as ${client.user?.tag}!`);
-};
+    let localization = client.intl.get("en");
+
+    console.log(localization?.handle("events.ready.message", "Logged in as {0}!", [client.user?.tag!]))
+}
