@@ -1,4 +1,5 @@
 import { Collection } from "discord.js";
+import { cloneDeep } from "lodash";
 import { Serval } from "../Serval";
 
 export class BaseModuleManager<I> {
@@ -31,7 +32,7 @@ export class BaseModuleManager<I> {
      * @param key The key of the structure to clone.
      */
     clone(key: string) {
-        return Object.assign({}, this.get(key));
+        return cloneDeep(this.cache.get(key));
     }
 
 }
