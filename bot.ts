@@ -8,7 +8,7 @@ import { Serval } from "./src/Serval";
 // Create the bot client.
 const bot = new Serval({
     // Temporarily use all intents.
-    intents: Object.values(GatewayIntentBits).filter((intent) => typeof intent == "number").reduce(
+    intents: Object.values(GatewayIntentBits).filter((intent) => typeof intent === "number").reduce(
         (prev, intent) => prev | <number>intent, 0
     ),
 
@@ -19,7 +19,7 @@ const bot = new Serval({
 
     // Serval inernational options.
     defaultLocale: process.env.DEFAULT_LOCALE || "en-US"
-})
+});
 
 // Start the bot.
 bot.start(process.env.SERVAL_TOKEN);
