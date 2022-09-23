@@ -21,7 +21,6 @@ export class CommandManager {
     }
 
     async load(name: string, filePath: string, category?: CommandCategory) {
-        // TODO: This is ugly.
         const commandExports = await import(filePath);
         const command: Command = commandExports[Object.keys(commandExports)[0]];
 
@@ -50,6 +49,7 @@ export class CommandManager {
                 const directoryCategory = new CommandCategory(file, category);
 
                 if (category) {
+                    // Set the categories parent
                     directoryCategory.parent = category;
 
                     // Add the category to the parent's children.
