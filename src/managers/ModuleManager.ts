@@ -1,25 +1,14 @@
 import path from "path";
-import { Collection } from "discord.js";
 import { lstatSync, readdirSync } from "fs";
 import { Serval } from "../Serval";
+import { BaseModuleManager } from "./BaseModuleManager";
 
 /**
  * A basic manager for handling all things related to a single type of structure as modules.
  */
-export class ModuleManager<I> {
-    /**
-     * The client that instantiated this manager.
-     */
-    public client: Serval;
-
-    /**
-     * A collection of all the structures that belong to this manager.
-     */
-    public cache: Collection<string, I>;
-
+export class ModuleManager<I> extends BaseModuleManager<I> {
     constructor(client: Serval) {
-        this.client = client;
-        this.cache = new Collection<string, I>();
+        super(client);
     }
 
     /**
