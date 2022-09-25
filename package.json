@@ -7,7 +7,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node .",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -20,12 +22,22 @@
   },
   "homepage": "https://github.com/irisu01/serval#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "discord.js": "^14.4.0",
     "dotenv": "^16.0.2",
+    "lodash": "^4.17.21",
     "node-fetch": "^3.2.10"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.185",
     "@types/node": "^18.7.18",
-    "@types/node-fetch": "^2.6.2"
+    "@types/node-fetch": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1"
   }
 }
