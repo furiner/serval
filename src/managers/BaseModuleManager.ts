@@ -3,7 +3,6 @@ import { cloneDeep } from "lodash";
 import { Serval } from "../Serval";
 
 export class BaseModuleManager<I> {
-
     /**
      * The client that instantiated this manager.
      */
