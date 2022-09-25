@@ -1,13 +1,18 @@
 {
     "compilerOptions": {
-        "lib": ["esnext"],
-        "target": "esnext",
-        "module": "node16",
-        "moduleResolution": "node",
-        "outDir": "dist",
-
-        "noImplicitAny": true,
-        "removeComments": true,
-        "strict": true
-    }
+      "outDir": "./dist/",
+      "module": "commonjs",
+      "target": "esnext",
+      "strict": true,
+      "declaration": true,
+      "esModuleInterop": true,
+      "removeComments": true,
+      "noImplicitAny": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noFallthroughCasesInSwitch": true
+    },
+    "include": [
+      "src/**/*.ts"
+    ]
 }
