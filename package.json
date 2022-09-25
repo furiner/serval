@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/irisu01/serval#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "discord.js": "^14.4.0",
     "dotenv": "^16.0.2",
     "lodash": "^4.17.21",

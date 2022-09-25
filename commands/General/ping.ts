@@ -8,14 +8,14 @@ export class Ping extends Command {
 
     }
 
-    run(client: Serval, interaction: CommandInteraction) {
+    async run(_: Serval, interaction: CommandInteraction): Promise<void> {
         interaction.reply({
             content: "Pong!",
             ephemeral: true
         });
     }
 
-    build(builder: SlashCommandBuilder) {
+    build(builder: SlashCommandBuilder): SlashCommandBuilder {
         return builder;
     }
 }

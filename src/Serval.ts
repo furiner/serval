@@ -4,6 +4,7 @@ import { CommandManager } from "./managers/CommandManager";
 import { EventManager } from "./managers/EventManager";
 import { LocalizationManager } from "./managers/LocalizationManager";
 import { ServalOptions } from "./utils/ServalOptions";
+import { Logger } from "./utils/Logger";
 
 export class Serval extends Client {
     /**
@@ -12,6 +13,7 @@ export class Serval extends Client {
     public commands: CommandManager;
     public events: EventManager;
     public intl: LocalizationManager;
+    public logger: Logger;
 
     public options: ServalOptions;
 
@@ -22,6 +24,7 @@ export class Serval extends Client {
         this.commands = new CommandManager(this);
         this.events = new EventManager(this);
         this.intl = new LocalizationManager(this);
+        this.logger = new Logger(this);
     }
 
     async start(token?: string): Promise<string> {
