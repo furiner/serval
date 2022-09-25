@@ -29,13 +29,13 @@ export class Localization {
 
         while (result.includes(`{${idx}`)) {
             if (format) {
-                let str = format[idx];
-                if (str == null)
+                const str = format[idx];
+                if (str === null)
                     throw new Error(`Could not find formatted string in index: ${idx}.`);
 
                 result = result.replace(`{${idx}}`, str);
             } else {
-                throw new Error("Localizable string expected a format parameter, but got none.")
+                throw new Error("Localizable string expected a format parameter, but got none.");
             }
 
             idx++;

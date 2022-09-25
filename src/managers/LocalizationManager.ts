@@ -19,6 +19,6 @@ export class LocalizationManager extends ModuleManager<Localization> {
         const localization = new Localization(key, (await import(filePath)).default);
         
         // Handle the localization.
-        this.cache.set(key, localization)
+        this.cache.set(key, localization);
     }
 }
