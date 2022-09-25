@@ -37,7 +37,6 @@ export class Serval extends Client {
         // Build all commands.
         for (const command of this.commands.cache.values()) {
             const slashBuilder = command.build(new SlashCommandBuilder());
-            console.log(command);
             slashBuilder.setName(command.label.toLowerCase());
             slashBuilder.setDescription(command.description);
 
