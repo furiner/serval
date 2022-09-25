@@ -1,4 +1,4 @@
-import path from "path";
+import { join } from "path";
 import { lstatSync, readdirSync } from "fs";
 import { Serval } from "../Serval";
 import { BaseModuleManager } from "./BaseModuleManager";
@@ -30,11 +30,11 @@ export class CommandManager extends BaseModuleManager<Command> {
         // Iterate through the directory for all the possible commands..
         for (const file of readdirSync(directory)) {
             // Get the stats for the path.
-            const lstat = lstatSync(path.join(directory, file));
+            const lstat = lstatSync(join(directory, file));
 
             if (lstat.isFile()) {
                 // This is likely a file, so we'll try to load it.
-                await this.load(file.split(".")[0], path.join(directory, file), category);
+                await this.load(file.split(".")[0], join(directory, file), category);
             } else {
                 // This is likely a directory, so we'll try to load all the files in it.
                 // Create a category for this directory.
@@ -49,7 +49,7 @@ export class CommandManager extends BaseModuleManager<Command> {
                 }
 
                 // Load all the files.
-                await this.loadAll(path.join(directory, file), directoryCategory);
+                await this.loadAll(join(directory, file), directoryCategory);
             }
         }
     }
