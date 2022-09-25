@@ -18,12 +18,20 @@ export class BaseModuleManager<I> {
         this.client = client;
         this.cache = new Collection<string, I>();
     }
+    
+    /**
+     * Validates whether a structure in the manager exists.
+     * @param key The key of the structure to validate.
+     */
+    has(key: string): boolean {
+        return this.cache.has(key);
+    }
 
     /**
      * Gets a structure from this manager.
      * @param key The key of the structure to get.
      */
-    get(key: string) {
+    get(key: string): I | undefined {
         return this.cache.get(key);
     }
 
@@ -31,7 +39,7 @@ export class BaseModuleManager<I> {
      * Clones a structure from this manager.
      * @param key The key of the structure to clone.
      */
-    clone(key: string) {
+    clone(key: string): I | undefined {
         return cloneDeep(this.cache.get(key));
     }
 

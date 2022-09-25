@@ -10,7 +10,7 @@ export class CommandManager extends BaseModuleManager<Command> {
         super(client);
     }
 
-    async load(name: string, filePath: string, category?: CommandCategory) {
+    async load(name: string, filePath: string, category?: CommandCategory): Promise<void> {
         const commandExports = await import(filePath);
         const command = new commandExports[Object.keys(commandExports)[0]]();
 
@@ -26,7 +26,7 @@ export class CommandManager extends BaseModuleManager<Command> {
         this.cache.set(name, command);
     }
 
-    async loadAll(directory: string, category?: CommandCategory) {
+    async loadAll(directory: string, category?: CommandCategory): Promise<void> {
         // Iterate through the directory for all the possible commands..
         for (const file of readdirSync(directory)) {
             // Get the stats for the path.

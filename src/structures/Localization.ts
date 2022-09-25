@@ -16,7 +16,7 @@ export class Localization {
      * @param defaultMessage
      * @param format
      */
-    handle(key: string, defaultMessage: string, format?: Array<string>) {
+    handle(key: string, defaultMessage: string, format?: Array<string>): string {
         // Recursively handle the key if it's a nested object.
         let result = defaultMessage;
 

@@ -11,11 +11,11 @@ export class LocalizationManager extends ModuleManager<Localization> {
      * Get a localization by its language key.
      * @param locale The locale to get.
      */
-    get(locale: string) {
+    get(locale: string): Localization | undefined {
         return this.cache.get(locale) ?? this.cache.get(this.client.options.defaultLocale);
     }
     
-    async load(key: string, filePath: string) {
+    async load(key: string, filePath: string): Promise<void>  {
         const localization = new Localization(key, (await import(filePath)).default);
         
         // Handle the localization.

@@ -21,11 +21,11 @@ export class Command {
         this.category = undefined;
     }
 
-    run(client: Serval, interaction: CommandInteraction) {
+    async run(client: Serval, interaction: CommandInteraction): Promise<void> {
         return;
     }
 
-    build(builder: SlashCommandBuilder) {
+    build(builder: SlashCommandBuilder): SlashCommandBuilder {
         return builder;
     }
 }

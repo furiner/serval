@@ -24,7 +24,9 @@ export class Serval extends Client {
         this.intl = new LocalizationManager(this);
     }
 
-    public async start(token?: string) {
+    async start(token?: string): Promise<string> {
+        const slashCommands = []; 
+        
         // Handle all the commands and events first.
         await this.commands.loadAll(this.options.commandsDirectory);
         await this.events.loadAll(this.options.eventsDirectory);
@@ -33,8 +35,6 @@ export class Serval extends Client {
         await this.intl.loadAll(this.options.intlDirectory);
 
         // Build all commands.
-        const slashCommands = [];
-
         for (const command of this.commands.cache.values()) {
             const slashBuilder = command.build(new SlashCommandBuilder());
             console.log(command);
@@ -48,17 +48,13 @@ export class Serval extends Client {
         // Start the client.
         const resp = await this.login(token);
 
-
         // Register all the commands.
-        const rest = new REST({ version: "9" }).setToken(token || "");
-
-        await rest.put(
+        await new REST({ version: "9" }).setToken(token || "").put(
             Routes.applicationCommands(this.user?.id || ""),
             { body: slashCommands },
         );
 
-
-        // Return the response of login.
+        // Return the response of the login.
         return resp;
     }
 }

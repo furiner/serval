@@ -8,7 +8,7 @@ export class EventManager extends ModuleManager<Event> {
         super(client);
     }
     
-    async load(key: string, filePath: string) {
+    async load(key: string, filePath: string): Promise<void>  {
         const event: Event = (await import(filePath)).default;
 
         // Handle the event.
