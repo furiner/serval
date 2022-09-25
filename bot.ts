@@ -2,6 +2,7 @@
 import { config } from "dotenv";
 config();
 
+import { join } from "path";
 import { GatewayIntentBits } from "discord.js";
 import { Serval } from "./src/Serval";
 
@@ -13,12 +14,12 @@ const bot = new Serval({
     ),
 
     // Serval-esque options.
-    commandsDirectory: process.env.COMMAND_DIRECTORY || "./commands",
-    eventsDirectory: process.env.EVENT_DIRECTORY || "./events",
-    intlDirectory: process.env.INTL_DIRECTORY || "./i18n",
+    commandsDirectory: process.env.COMMAND_DIRECTORY ?? join(__dirname, "./commands"),
+    eventsDirectory: process.env.EVENT_DIRECTORY ?? join(__dirname, "./events"),
+    intlDirectory: process.env.INTL_DIRECTORY ?? join(__dirname, "./i18n"),
 
     // Serval inernational options.
-    defaultLocale: process.env.DEFAULT_LOCALE || "en-US"
+    defaultLocale: process.env.DEFAULT_LOCALE ?? "en-US"
 });
 
 // Start the bot.
