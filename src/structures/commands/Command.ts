@@ -22,7 +22,8 @@ export class Command {
     }
 
     async run(client: Serval, interaction: CommandInteraction): Promise<void> {
-        return;
+        client;
+        interaction.reply("This command has not been implemented yet.");
     }
 
     build(builder: SlashCommandBuilder): SlashCommandBuilder {
